@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block titre %}
+    {{ parent() }} : Nouvelle espèce
+{% endblock %}
+
+{% block contenu %}
+    <h3>Création d'une nouvelle espèce :</h3>
+    
+    {{ include('espece/_form.html.twig') }}
+
+    <a href="{{ path('espece_index') }}">Retourner à la liste des espèces</a>
+{% endblock %}

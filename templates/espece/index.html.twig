@@ -1,0 +1,40 @@
+{% extends "base.html.twig" %}
+
+{% block titre %}
+    {{ parent() }} : Liste des espèces 
+{% endblock %}
+
+{% block contenu %}
+    <h3>Voici la liste des espèces :</h3>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for espece in especes %}
+                <tr>
+                    <td>{{ espece.id }}</td>
+                    <td>{{ espece.nom }}</td>
+                    <td>
+                        <a href="{{ path('espece_show', {'id': espece.id}) }}">voir</a>
+                        <a href="{{ path('espece_edit', {'id': espece.id}) }}">modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="3">Aucune espèce trouvée.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br/>
+
+    <a href="{{ path('espece_new') }}">Créer une nouvelle espèce</a>
+    
+{% endblock %}

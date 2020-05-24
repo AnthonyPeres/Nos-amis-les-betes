@@ -1,0 +1,16 @@
+{% extends "base.html.twig" %}
+
+{% block titre %}
+    {{ parent() }} : Modification animal 
+{% endblock %}
+
+{% block contenu %}
+    <h3>Modifier les informations de l'animal :</h3>
+
+    {{ include('animal/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('animal_index') }}">Retourner à la liste des animaux</a>
+
+    {{ include('animal/_delete_form.html.twig') }}
+    
+{% endblock %}

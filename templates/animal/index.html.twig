@@ -1,0 +1,59 @@
+{% extends "base.html.twig" %}
+
+{% block titre %}
+    {{ parent() }} : Liste des animaux
+{% endblock %}
+
+{% block contenu %}
+    <h3>Voici la liste des animaux :</h3>
+
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Age</th>
+                <th>Espèce</th>
+                <th>Maitre(sse)</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for animal in animals %}
+                <tr>
+                    <td>{{ animal.id }}</td>
+                    <td>{{ animal.nom }}</td>
+                    <td>{{ animal.age }}</td>
+
+                    <td>
+                        {% if animal.GetEspece != null %}
+                            {{ animal.espece}}
+                        {% else %}
+                            Non renseignée
+                        {% endif %}
+                    </td>
+
+                    <td>
+                        {% for maitre in animal.getPersonnes() %}
+                            {{maitre.getNom()}}  
+                        {% else %}
+                            Aucun(e) maitre(sse)
+                        {% endfor %}
+                    </td>
+                    <td>
+                        <a href="{{ path('animal_show', {'id': animal.id}) }}">voir</a>
+                        <a href="{{ path('animal_edit', {'id': animal.id}) }}">modifier</a>
+                    </td>
+                </tr>
+            {% else %}
+                <tr>
+                    <td colspan="4">Aucun animal trouvé.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br/>
+
+    <a href="{{ path('animal_new') }}">Créer un nouvel animal</a>
+{% endblock %}

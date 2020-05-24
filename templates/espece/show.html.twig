@@ -1,0 +1,31 @@
+{% extends "base.html.twig" %}
+
+{% block titre %}
+    {{ parent() }} : Espèce
+{% endblock %}
+
+{% block contenu %}
+    <h3>Espèce :</h3>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ espece.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ espece.nom }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {{ include('espece/_delete_form.html.twig') }}
+
+    <a href="{{ path('espece_index') }}">Retourner à la liste des espèces</a>
+
+    <br/>
+
+    <a href="{{ path('espece_edit', {'id': espece.id}) }}">Modifier</a>
+
+{% endblock %}

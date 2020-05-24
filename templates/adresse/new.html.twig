@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block titre %}
+    {{ parent() }} : Créer une adresse
+{% endblock %}
+
+{% block contenu %}
+    <h3>Création d'une nouvelle adresse :</h3>
+    
+    {{ include('adresse/_form.html.twig') }}
+
+    <a href="{{ path('adresse_index') }}">Retourner à la liste des adresses</a>
+{% endblock %}

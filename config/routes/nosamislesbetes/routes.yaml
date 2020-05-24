@@ -1,0 +1,88 @@
+index:
+    path: /index
+    controller: App\Controller\NosAmisLesBetesController:index
+
+navigation:
+    path: /navigation
+    controller: App\Controller\NosAmisLesBetesController:navigation
+
+adresse_index:
+    path: /adresse/index
+    controller: App\Controller\AdresseController::index
+
+adresse_new:
+    path: /adresse/new
+    controller: App\Controller\AdresseController::new
+
+adresse_show:
+    path: /adresse/show/{id}
+    controller: App\Controller\AdresseController::show
+
+adresse_edit:
+    path: /adresse/edit/{id}
+    controller: App\Controller\AdresseController::edit
+
+adresse_delete:
+    path: /adresse/delete/{id}
+    controller: App\Controller\AdresseController::delete
+
+personne_index:
+    path: /personne/index
+    controller: App\Controller\PersonneController::index
+
+personne_new:
+    path: /personne/new
+    controller: App\Controller\PersonneController::new
+
+personne_show:
+    path: /personne/show/{id}
+    controller: App\Controller\PersonneController::show
+
+personne_edit:
+    path: /personne/edit/{id}
+    controller: App\Controller\PersonneController::edit
+
+personne_delete:
+    path: /personne/delete/{id}
+    controller: App\Controller\PersonneController::delete
+
+animal_index:
+    path: /animal/index
+    controller: App\Controller\AnimalController::index
+
+animal_new:
+    path: /animal/new
+    controller: App\Controller\AnimalController::new
+
+animal_show:
+    path: /animal/show/{id}
+    controller: App\Controller\AnimalController::show
+
+animal_edit:
+    path: /animal/edit/{id}
+    controller: App\Controller\AnimalController::edit
+
+animal_delete:
+    path: /animal/delete/{id}
+    controller: App\Controller\AnimalController::delete
+
+espece_index:
+    path: /espece/index
+    controller: App\Controller\EspeceController::index
+
+espece_new:
+    path: /espece/new
+    controller: App\Controller\EspeceController::new
+
+espece_show:
+    path: /espece/show/{id}
+    controller: App\Controller\EspeceController::show
+
+espece_edit:
+    path: /espece/edit/{id}
+    controller: App\Controller\EspeceController::edit
+
+espece_delete:
+    path: /espece/delete/{id}
+    controller: App\Controller\EspeceController::delete
+

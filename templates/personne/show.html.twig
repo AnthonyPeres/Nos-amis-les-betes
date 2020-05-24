@@ -1,0 +1,38 @@
+{% extends "base.html.twig" %}
+
+{% block titre %}
+    {{ parent() }} : Personne
+{% endblock %}
+
+{% block contenu %}
+    <h3>Voici une personne :</h3>
+    
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ personne.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ personne.nom }}</td>
+            </tr>
+            <tr>
+                <th>Sexe</th>
+                <td>{{ personne.sexe }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ personne.age }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {{ include('personne/_delete_form.html.twig') }}
+
+    <a href="{{ path('personne_index') }}">Retourner à la liste des personnes</a>
+
+    <br/>
+
+    <a href="{{ path('personne_edit', {'id': personne.id}) }}">Modifier</a>
+{% endblock %}

@@ -1,0 +1,14 @@
+{% extends "base.html.twig" %}
+
+{% block titre %}
+    {{ parent() }} : Nouvel animal 
+{% endblock %}
+
+{% block contenu %}
+    <h3>Creer un nouvel animal :</h3>
+
+    {{ include('animal/_form.html.twig') }}
+
+    <a href="{{ path('animal_index') }}">Retourner à la liste des animaux</a>
+    
+{% endblock %}

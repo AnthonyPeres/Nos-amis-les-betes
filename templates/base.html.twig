@@ -1,0 +1,26 @@
+<!DOCTYPE html>
+
+<html>
+    <body>
+        <div id="navigation">
+            <hr />
+                {{ render(path('navigation')) }} 
+            <hr />
+        </div>
+        
+        <h1>
+            {% block titre %}Nos amis les bêtes{% endblock %}
+        </h1>
+
+        <div id="contenu">
+            {% block contenu %}
+            {% endblock %} 
+        </div>
+
+        <hr/>
+
+        <div id="pied_de_page" >
+            <p>&copy; APDC.</p> 
+        </div>
+    </body>
+</html>

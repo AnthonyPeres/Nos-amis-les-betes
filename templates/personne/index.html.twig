@@ -1,0 +1,53 @@
+{% extends "base.html.twig" %}
+
+{% block titre %}
+    {{ parent() }} : Liste des personnes 
+{% endblock %}
+
+{% block contenu %}
+    <h3>Voici la liste des personnes :</h3>
+    
+    <table class="table">
+        <thead>
+            <tr>
+                <th>Id</th>
+                <th>Nom</th>
+                <th>Sexe</th>
+                <th>Age</th>
+                <th>Ses animaux</th>
+                <th>Actions</th>
+            </tr>
+        </thead>
+        <tbody>
+            {% for personne in personnes %}
+            <tr>
+                <td>{{ personne.id }}</td>
+                <td>{{ personne.nom }}</td>
+                <td>{{ personne.sexe }}</td>
+                <td>{{ personne.age }}</td>
+
+                <td>
+                    {% for animal in personne.getAnimal() %}
+                        {{animal.getNom()}}  
+                    {% else %}
+                        Aucun animal
+                    {% endfor %}
+                </td>
+                <td>
+                    <a href="{{ path('personne_show', {'id': personne.id}) }}">voir</a>
+                    <a href="{{ path('personne_edit', {'id': personne.id}) }}">modifier</a>
+                </td>
+            </tr>
+        {% else %}
+                <tr>
+                    <td colspan="3">Aucune personne trouvée.</td>
+                </tr>
+            {% endfor %}
+        </tbody>
+    </table>
+
+    <br/>
+
+    <a href="{{ path('personne_new') }}">Créer une nouvelle personne</a>
+    
+{% endblock %}

@@ -1,0 +1,15 @@
+{% extends "base.html.twig" %}
+
+{% block titre %}
+    {{ parent() }} : Modifier personne
+{% endblock %}
+
+{% block contenu %}
+    <h3>Modifier les informations sur la personne :</h3>
+    
+    {{ include('personne/_form.html.twig', {'button_label': 'Modifier'}) }}
+
+    <a href="{{ path('personne_index') }}">Retourner à la liste des personnes</a>
+
+    {{ include('personne/_delete_form.html.twig') }}
+{% endblock %}

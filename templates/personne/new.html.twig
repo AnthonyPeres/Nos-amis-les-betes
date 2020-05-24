@@ -1,0 +1,13 @@
+{% extends "base.html.twig" %}
+
+{% block titre %}
+    {{ parent() }} : Création d'une nouvelle personne
+{% endblock %}
+
+{% block contenu %}
+    <h3>Création d'une nouvelle personne :</h3>
+    
+    {{ include('personne/_form.html.twig') }}
+
+    <a href="{{ path('personne_index') }}">Retourner à la liste des personnes</a>
+{% endblock %}

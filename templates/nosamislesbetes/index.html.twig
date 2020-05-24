@@ -1,0 +1,12 @@
+{% extends "base.html.twig" %}
+
+{% block titre %}
+    {{ parent() }} : Accueil 
+{% endblock %}
+
+{% block contenu %}
+    <h3>Bienvenue</h3>
+    
+    <p><i>page visitée {{ nbreFois }} fois.</i></p>
+    
+{% endblock %}

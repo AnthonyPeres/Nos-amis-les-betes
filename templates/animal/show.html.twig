@@ -1,0 +1,35 @@
+{% extends "base.html.twig" %}
+
+{% block titre %}
+    {{ parent() }} : Animal 
+{% endblock %}
+
+{% block contenu %}
+    <h3>Animal :</h3>
+
+    <table class="table">
+        <tbody>
+            <tr>
+                <th>Id</th>
+                <td>{{ animal.id }}</td>
+            </tr>
+            <tr>
+                <th>Nom</th>
+                <td>{{ animal.nom }}</td>
+            </tr>
+            <tr>
+                <th>Age</th>
+                <td>{{ animal.age }}</td>
+            </tr>
+        </tbody>
+    </table>
+
+    {{ include('animal/_delete_form.html.twig') }}
+
+    <a href="{{ path('animal_index') }}">Retourner à la liste des animaux</a>
+
+    <br/>
+
+    <a href="{{ path('animal_edit', {'id': animal.id}) }}">Modifier</a>
+    
+{% endblock %}
