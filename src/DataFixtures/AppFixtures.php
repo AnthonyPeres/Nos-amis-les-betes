@@ -88,7 +88,7 @@ class AppFixtures extends Fixture
                 $noms[] = $nom;
 
                 $personne->setNom($nom);
-                $personne->setSexe('M');
+                $personne->setSexe('H');
             } else {
                 $nom = $faker->lastName . ' ' . $faker->firstNameFemale;
 

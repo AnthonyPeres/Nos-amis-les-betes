@@ -26,9 +26,18 @@
                     <td colspan="3">Aucun habitant</td>
                 {% endfor %}
             </tr>
+
+            <tr>
+                <th>Moyenne d'age des animaux</th>
+                {% if moyenneAge != null %}
+                    <td>{{moyenneAge}} ans</td>
+                {% else %} 
+                    <td>Aucun animal</td>
+                {% endif %}
+            </tr>
         </tbody>
     </table>
-@
+
     {{ include('adresse/_delete_form.html.twig') }}
 
     <a href="{{ path('adresse_index') }}">Retourner à la liste des adresses</a>

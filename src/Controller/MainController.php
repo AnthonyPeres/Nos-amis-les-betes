@@ -7,7 +7,7 @@ use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\Routing\Annotation\Route;
 use Symfony\Component\HttpFoundation\Session\Session;
 
-class NosAmisLesBetesController extends AbstractController
+class MainController extends AbstractController
 {
 
     public function index(Session $session) {

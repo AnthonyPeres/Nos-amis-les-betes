@@ -5,6 +5,7 @@ namespace App\Controller;
 use App\Entity\Espece;
 use App\Form\EspeceType;
 use App\Repository\EspeceRepository;
+use App\Repository\PersonneRepository;
 use Symfony\Bundle\FrameworkBundle\Controller\AbstractController;
 use Symfony\Component\HttpFoundation\Request;
 use Symfony\Component\HttpFoundation\Response;
@@ -40,9 +41,9 @@ class EspeceController extends AbstractController
         ]);
     }
 
-    public function show(Espece $espece): Response
+    public function show(Espece $espece, PersonneRepository $personneRepository): Response
     {
-        return $this->render('espece/show.html.twig', ['espece' => $espece]);
+        return $this->render('espece/show.html.twig', ['espece' => $espece, 'parite' => $personneRepository->getPariteEspece($espece)]);
     }
 
     public function edit(Request $request, Espece $espece): Response

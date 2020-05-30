@@ -19,11 +19,6 @@ class EspeceRepository extends ServiceEntityRepository
         parent::__construct($registry, Espece::class);
     }
 
-    public function getPariteMaitreMaitresse(Espece $espece): string
-    {
-        
-    }
-
     // /**
     //  * @return Espece[] Returns an array of Espece objects
     //  */

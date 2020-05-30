@@ -1,10 +1,10 @@
 index:
     path: /index
-    controller: App\Controller\NosAmisLesBetesController:index
+    controller: App\Controller\MainController:index
 
 navigation:
     path: /navigation
-    controller: App\Controller\NosAmisLesBetesController:navigation
+    controller: App\Controller\MainController:navigation
 
 adresse_index:
     path: /adresse/index
