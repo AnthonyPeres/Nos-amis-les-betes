@@ -5,7 +5,17 @@
 {% endblock %}
 
 {% block contenu %}
-    <h3>Voici la liste des espèces :</h3>
+    <h3>Voici la liste des {{nbEspeces}} espèces trouvées en base de données :</h3>
+
+    <div class="alert">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} mb-2">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
     
     <table class="table">
         <thead>

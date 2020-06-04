@@ -17,6 +17,7 @@ class AnimalController extends AbstractController
     {
         return $this->render('animal/index.html.twig', [
             'animals' => $animalRepository->findAll(),
+            'nbAnimals' => sizeof($animalRepository->findAll()),
         ]);
     }
 

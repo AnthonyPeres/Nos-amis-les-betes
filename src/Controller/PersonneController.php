@@ -17,6 +17,7 @@ class PersonneController extends AbstractController
     {
         return $this->render('personne/index.html.twig', [
             'personnes' => $personneRepository->findAll(),
+            'nbPersonnes' => sizeof($personneRepository->findAll()),
         ]);
     }
 

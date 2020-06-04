@@ -18,6 +18,7 @@ class AdresseController extends AbstractController
     {
         return $this->render('adresse/index.html.twig', [
             'adresses' => $adresseRepository->findAll(),
+            'nbAdresses' => sizeof($adresseRepository->findAll()),
         ]);
     }
 
@@ -68,12 +69,23 @@ class AdresseController extends AbstractController
 
     public function delete(Request $request, Adresse $adresse): Response
     {
-        if ($this->isCsrfTokenValid('delete'.$adresse->getId(), $request->request->get('_token'))) {
-            $entityManager = $this->getDoctrine()->getManager();
-            $entityManager->remove($adresse);
-            $entityManager->flush();
+        if (count($adresse->getPersonnes()) === 0) {
+            if ($this->isCsrfTokenValid('delete'.$adresse->getId(), $request->request->get('_token'))) {
+                $entityManager = $this->getDoctrine()->getManager();
+                $entityManager->remove($adresse);
+                $entityManager->flush();
+                $this->addFlash(
+                    'success',
+                    'Adresse supprimée !'
+                );
+            }
+        } else {
+            $this->addFlash(
+                'warning',
+                'Vous ne pouvez pas supprimer cette adresse car elle est occupée !'
+            );
         }
-
+        
         return $this->redirectToRoute('adresse_index');
     }
 }
