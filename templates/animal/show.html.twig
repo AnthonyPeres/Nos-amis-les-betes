@@ -24,12 +24,17 @@
         </tbody>
     </table>
 
-    {{ include('animal/_delete_form.html.twig') }}
-
-    <a href="{{ path('animal_index') }}">Retourner à la liste des animaux</a>
+    <div>
+        {% if is_granted('ROLE_ADMIN') %}
+            {{ include('animal/_delete_form.html.twig') }}
+        {% endif %}
+        
+        {% if is_granted('ROLE_SECRETAIRE') %}
+                <a href="{{ path('animal_edit', {'id': animal.id}) }}">Modifier</a>
+        {% endif %}
+    </div>
 
     <br/>
 
-    <a href="{{ path('animal_edit', {'id': animal.id}) }}">Modifier</a>
-    
+    <a href="{{ path('animal_index') }}">Retourner à la liste des animaux</a>
 {% endblock %}

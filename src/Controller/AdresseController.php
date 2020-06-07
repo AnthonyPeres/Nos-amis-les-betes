@@ -13,7 +13,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AdresseController extends AbstractController
 {
-    
     public function index(AdresseRepository $adresseRepository): Response
     {
         return $this->render('adresse/index.html.twig', [
@@ -24,6 +23,7 @@ class AdresseController extends AbstractController
 
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SECRETAIRE');
         $adresse = new Adresse();
         $form = $this->createForm(AdresseType::class, $adresse);
         $form->handleRequest($request);
@@ -32,7 +32,7 @@ class AdresseController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($adresse);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Adresse créée !');
             return $this->redirectToRoute('adresse_index');
         }
 
@@ -52,12 +52,13 @@ class AdresseController extends AbstractController
 
     public function edit(Request $request, Adresse $adresse): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SECRETAIRE');
         $form = $this->createForm(AdresseType::class, $adresse);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success', 'Adresse modifiée !');
             return $this->redirectToRoute('adresse_index');
         }
 
@@ -69,21 +70,16 @@ class AdresseController extends AbstractController
 
     public function delete(Request $request, Adresse $adresse): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         if (count($adresse->getPersonnes()) === 0) {
             if ($this->isCsrfTokenValid('delete'.$adresse->getId(), $request->request->get('_token'))) {
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->remove($adresse);
                 $entityManager->flush();
-                $this->addFlash(
-                    'success',
-                    'Adresse supprimée !'
-                );
+                $this->addFlash('success', 'Adresse supprimée !');
             }
         } else {
-            $this->addFlash(
-                'warning',
-                'Vous ne pouvez pas supprimer cette adresse car elle est occupée !'
-            );
+            $this->addFlash('warning', 'Vous ne pouvez pas supprimer cette adresse car elle est occupée !');
         }
         
         return $this->redirectToRoute('adresse_index');

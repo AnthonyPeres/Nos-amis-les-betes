@@ -1,11 +1,21 @@
 {% extends "base.html.twig" %}
 
 {% block titre %}
-    {{ parent() }} : Liste des animaux
+    {{ parent() }} : Liste des animaux ({{nbAnimals}})
 {% endblock %}
 
 {% block contenu %}
     <h3>Voici la liste des {{nbAnimals}} animaux trouvées en base de données :</h3>
+
+    <div class="alert">
+        {% for label, messages in app.flashes %}
+            {% for message in messages %}
+                <div class="alert alert-{{ label }} mb-2">
+                    {{ message }}
+                </div>
+            {% endfor %}
+        {% endfor %}
+    </div>
 
     <table class="table">
         <thead>
@@ -42,7 +52,10 @@
                     </td>
                     <td>
                         <a href="{{ path('animal_show', {'id': animal.id}) }}">voir</a>
-                        <a href="{{ path('animal_edit', {'id': animal.id}) }}">modifier</a>
+                        
+                        {% if is_granted('ROLE_SECRETAIRE') %}
+                            <a href="{{ path('animal_edit', {'id': animal.id}) }}">modifier</a>
+                        {% endif %} 
                     </td>
                 </tr>
             {% else %}
@@ -55,5 +68,8 @@
 
     <br/>
 
-    <a href="{{ path('animal_new') }}">Créer un nouvel animal</a>
+    {% if is_granted('ROLE_SECRETAIRE') %}
+        <a href="{{ path('animal_new') }}">Créer un nouvel animal</a>
+    {% endif %}
+
 {% endblock %}

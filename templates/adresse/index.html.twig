@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block titre %}
-    {{ parent() }} : Les adresses
+    {{ parent() }} : Les adresses ({{nbAdresses}})
 {% endblock %}
 
 {% block contenu %}
@@ -32,7 +32,10 @@
                 <td>{{ adresse.intitule }}</td>
                 <td>
                     <a href="{{ path('adresse_show', {'id': adresse.id}) }}">voir</a>
-                    <a href="{{ path('adresse_edit', {'id': adresse.id}) }}">modifier</a>
+                    
+                    {% if is_granted('ROLE_SECRETAIRE') %}
+                        <a href="{{ path('adresse_edit', {'id': adresse.id}) }}">modifier</a>
+                    {% endif %}
                 </td>
             </tr>
         {% else %}
@@ -43,5 +46,9 @@
         </tbody>
     </table>
 
-    <a href="{{ path('adresse_new') }}">Créer une nouvelle adresse</a>
+    <br/>
+
+    {% if is_granted('ROLE_SECRETAIRE') %}
+        <a href="{{ path('adresse_new') }}">Créer une nouvelle adresse</a>
+    {% endif %}
 {% endblock %}

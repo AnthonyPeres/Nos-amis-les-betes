@@ -9,7 +9,6 @@ use Symfony\Component\HttpFoundation\Session\Session;
 
 class MainController extends AbstractController
 {
-
     public function index(Session $session) {
         if ($session->has('nbreFois'))
             $session->set('nbreFois', $session->get('nbreFois')+1); 
@@ -19,7 +18,22 @@ class MainController extends AbstractController
     }
 
     public function navigation() {
-        return $this->render('nosamislesbetes/navigation.html.twig');
+        $user = $this->getUser(); 
+        
+        if ($user) {
+            $logname = $user->getUsername(); 
+            $chaineRoles = '';
+            foreach ($user->getRoles() as $role) $chaineRoles .= ' '.$role;
+
+            return $this->render('nosamislesbetes/navigation.html.twig', [
+                'logname'=>$logname, 
+                'roles' => $chaineRoles
+            ]);
+        } 
+        
+        return $this->render('nosamislesbetes/navigation.html.twig', [
+            'logname'=> null, 
+            'roles' => null
+        ]);
     }
-    
 }

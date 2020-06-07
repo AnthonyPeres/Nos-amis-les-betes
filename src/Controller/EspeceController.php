@@ -24,6 +24,7 @@ class EspeceController extends AbstractController
 
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SECRETAIRE');
         $espece = new Espece();
         $form = $this->createForm(EspeceType::class, $espece);
         $form->handleRequest($request);
@@ -32,7 +33,7 @@ class EspeceController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($espece);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Espece créée !');
             return $this->redirectToRoute('espece_index');
         }
 
@@ -49,12 +50,13 @@ class EspeceController extends AbstractController
 
     public function edit(Request $request, Espece $espece): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SECRETAIRE');
         $form = $this->createForm(EspeceType::class, $espece);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success', 'Espece modifiée !');
             return $this->redirectToRoute('espece_index');
         }
 
@@ -66,21 +68,16 @@ class EspeceController extends AbstractController
 
     public function delete(Request $request, Espece $espece): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         if (count($espece->getAnimals()) === 0) {
             if ($this->isCsrfTokenValid('delete'.$espece->getId(), $request->request->get('_token'))) {
                 $entityManager = $this->getDoctrine()->getManager();
                 $entityManager->remove($espece);
                 $entityManager->flush();
-                $this->addFlash(
-                'warning',
-                'Espece supprimée...'
-            );
+                $this->addFlash('sucess', 'Espece supprimée');
             }
         } else {
-            $this->addFlash(
-                'warning',
-                'Cette espèce n\'est pas encore en voie de disparition !'
-            );
+            $this->addFlash('warning', 'Cette espèce n\'est pas encore en voie de disparition !');
         }
 
         return $this->redirectToRoute('espece_index');

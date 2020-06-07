@@ -15,16 +15,15 @@ security:
         ROLE_ADMIN: [ROLE_SECRETAIRE, ROLE_USER]
         ROLE_SECRETAIRE: [ROLE_USER]
 
-
     # Algorithme utilisé pour l'encodage des mots de passe
+    # L'option "auto" fournit le meilleur algorythme
     encoders:
-        App\Entity\User:
-            algorithm: auto
+        App\Entity\User: 'auto'
 
     # Permet de definir les composants qui vont permettrent d'identifier l'utilisateur
     # Ils vont écouter sur certaines requêtes et effectuer des opérations particulieres
     firewalls:
-        # Aucune authentification pour la partie dev
+    
         dev:
             pattern: ^/(_(profiler|wdt)|css|images|js)/
             security: false
@@ -35,9 +34,10 @@ security:
             form_login:
                 login_path: login
                 check_path: login
+                default_target_path: /nosamislesbetes/index
             logout:
                 path: logout
-                target: login
+                target: /nosamislesbetes/index
 
     # Permet de définir les niveaux d'accès à notre application
     access_control:

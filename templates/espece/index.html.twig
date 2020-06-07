@@ -1,7 +1,7 @@
 {% extends "base.html.twig" %}
 
 {% block titre %}
-    {{ parent() }} : Liste des espèces 
+    {{ parent() }} : Liste des espèces ({{nbEspeces}})
 {% endblock %}
 
 {% block contenu %}
@@ -32,7 +32,11 @@
                     <td>{{ espece.nom }}</td>
                     <td>
                         <a href="{{ path('espece_show', {'id': espece.id}) }}">voir</a>
-                        <a href="{{ path('espece_edit', {'id': espece.id}) }}">modifier</a>
+                        
+
+                        {% if is_granted('ROLE_SECRETAIRE') %}
+                            <a href="{{ path('espece_edit', {'id': espece.id}) }}">modifier</a>
+                        {% endif %}
                     </td>
                 </tr>
             {% else %}
@@ -45,6 +49,8 @@
 
     <br/>
 
-    <a href="{{ path('espece_new') }}">Créer une nouvelle espèce</a>
+    {% if is_granted('ROLE_SECRETAIRE') %}
+        <a href="{{ path('espece_new') }}">Créer une nouvelle espèce</a>
+    {% endif %}
     
 {% endblock %}

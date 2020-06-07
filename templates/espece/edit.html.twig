@@ -11,5 +11,8 @@
 
     <a href="{{ path('espece_index') }}">Retourner à la liste des espèces</a>
 
-    {{ include('espece/_delete_form.html.twig') }}
+    {% if is_granted('ROLE_ADMIN') %}
+        {{ include('espece/_delete_form.html.twig') }}
+    {% endif %}
+
 {% endblock %}

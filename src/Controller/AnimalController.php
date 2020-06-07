@@ -12,7 +12,6 @@ use Symfony\Component\Routing\Annotation\Route;
 
 class AnimalController extends AbstractController
 {
-    
     public function index(AnimalRepository $animalRepository): Response
     {
         return $this->render('animal/index.html.twig', [
@@ -23,6 +22,7 @@ class AnimalController extends AbstractController
 
     public function new(Request $request): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_SECRETAIRE');
         $animal = new Animal();
         $form = $this->createForm(AnimalType::class, $animal);
         $form->handleRequest($request);
@@ -31,7 +31,7 @@ class AnimalController extends AbstractController
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->persist($animal);
             $entityManager->flush();
-
+            $this->addFlash('success', 'Animal crée !');
             return $this->redirectToRoute('animal_index');
         }
 
@@ -50,12 +50,14 @@ class AnimalController extends AbstractController
 
     public function edit(Request $request, Animal $animal): Response
     {
+
+        $this->denyAccessUnlessGranted('ROLE_SECRETAIRE');
         $form = $this->createForm(AnimalType::class, $animal);
         $form->handleRequest($request);
 
         if ($form->isSubmitted() && $form->isValid()) {
             $this->getDoctrine()->getManager()->flush();
-
+            $this->addFlash('success', 'Animal modifié !');
             return $this->redirectToRoute('animal_index');
         }
 
@@ -67,10 +69,12 @@ class AnimalController extends AbstractController
 
     public function delete(Request $request, Animal $animal): Response
     {
+        $this->denyAccessUnlessGranted('ROLE_ADMIN');
         if ($this->isCsrfTokenValid('delete'.$animal->getId(), $request->request->get('_token'))) {
             $entityManager = $this->getDoctrine()->getManager();
             $entityManager->remove($animal);
             $entityManager->flush();
+            $this->addFlash('success', 'Animal supprimée de la base de données !');
         }
 
         return $this->redirectToRoute('animal_index');

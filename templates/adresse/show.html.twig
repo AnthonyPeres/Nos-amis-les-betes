@@ -38,12 +38,17 @@
         </tbody>
     </table>
 
-    {{ include('adresse/_delete_form.html.twig') }}
-
-    <a href="{{ path('adresse_index') }}">Retourner à la liste des adresses</a>
+    <div>
+        {% if is_granted('ROLE_ADMIN') %}
+            {{ include('adresse/_delete_form.html.twig') }}
+        {% endif %}
+        
+        {% if is_granted('ROLE_SECRETAIRE') %}
+                <a href="{{ path('adresse_edit', {'id': adresse.id}) }}">Modifier cette adresse</a>
+        {% endif %}
+    </div>
 
     <br/>
 
-    <a href="{{ path('adresse_edit', {'id': adresse.id}) }}">Modifier cette adresse</a>
-
+    <a href="{{ path('adresse_index') }}">Retourner à la liste des adresses</a>
 {% endblock %}

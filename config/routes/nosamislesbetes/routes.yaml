@@ -6,6 +6,10 @@ navigation:
     path: /navigation
     controller: App\Controller\MainController:navigation
 
+quisuisje:
+    path: /quisuisje
+    controller: App\Controller\MainController:quisuisje
+
 adresse_index:
     path: /adresse/index
     controller: App\Controller\AdresseController::index

@@ -1,7 +1,18 @@
 <div>
+    <span>
     <a href="{{ path('index') }}">Accueil</a>
     <a href="{{ path('espece_index') }}">Les espèces</a> 
     <a href="{{ path('animal_index') }}">Les animaux</a> 
     <a href="{{ path('adresse_index') }}">Les adresses</a> 
     <a href="{{ path('personne_index') }}">Les personnes</a> 
+    </span>
+    
+    <span style="float:right">
+        {% if logname != null %}
+            Connecté sous profil : {{app.user.username}}
+            <a style="margin-left:20px" href="{{path('logout')}}">Se deconnecter</a>
+        {% else %}
+            <a href="{{path('login')}}">Se connecter</a>
+        {% endif %}
+    </span>
 </div>

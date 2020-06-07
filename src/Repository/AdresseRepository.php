@@ -19,6 +19,15 @@ class AdresseRepository extends ServiceEntityRepository
         parent::__construct($registry, Adresse::class);
     }
 
+    public function search($title)
+    {
+        return $this->createQueryBuilder('Adresse')
+        ->andWhere('Adresse.intitule LIKE :title')
+        ->setParameter('title', '%'.$title.'%')
+        ->getQuery()
+        ->execute();
+    }
+
     // /**
     //  * @return Adresse[] Returns an array of Adresse objects
     //  */
